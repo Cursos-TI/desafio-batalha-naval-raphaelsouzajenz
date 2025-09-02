@@ -96,9 +96,93 @@ int main() {
 
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
+
+    int matrizCone[3][5] = {0};
+    int matrizCruz[3][5] = {0};
+    int matrizOctaedro[3][5] = {0};
+
+    // Gerando a matriz Cone
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j <= i; j++) {
+            matrizCone[i][j] = 1;
+        }
+    }
+
+    // Gerando a matriz Cruz
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (i == 1 || j == 2) {  // Linha e coluna central
+                matrizCruz[i][j] = 1;
+            }
+        }
+    }
+
+    // Gerando a matriz Octaedro
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (i == 2 || j == 2 || (i == 1 && (j == 1 || j == 3)) || (i == 3 && (j == 1 || j == 3))) {
+                matrizOctaedro[i][j] = 1;
+            }
+        }
+    }
+
+    // Posições de origem das habilidades no tabuleiro
+    int linhaCone = 2, colunaCone = 2;
+    int linhaCruz = 5, colunaCruz = 5;
+    int linhaOctaedro = 7, colunaOctaedro = 7;
+
     // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
 
-   
+    // Aplica a habilidade Cone
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (matrizCone[i][j] == 1) {
+                int linha = linhaCone + i - 2;  // Ajusta o deslocamento
+                int coluna = colunaCone + j - 2;  // Ajusta o deslocamento
+
+                // Verifica se a célula está dentro dos limites do tabuleiro
+                if (linha >= 0 && linha < TAM_TABULEIRO && coluna >= 0 && coluna < TAM_TABULEIRO) {
+                    if (tabuleiro[linha][coluna] != 3) {  // Não afeta os navios
+                        tabuleiro[linha][coluna] = 1;  // Marca a célula como afetada pelo cone
+                    }
+                }
+            }
+        }
+    }
+
+    // Aplica a habilidade Cruz
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (matrizCruz[i][j] == 1) {
+                int linha = linhaCruz + i - 1;  // Ajusta o deslocamento
+                int coluna = colunaCruz + j - 2;  // Ajusta o deslocamento
+
+                // Verifica se a célula está dentro dos limites do tabuleiro
+                if (linha >= 0 && linha < TAM_TABULEIRO && coluna >= 0 && coluna < TAM_TABULEIRO) {
+                    if (tabuleiro[linha][coluna] != 3) {  // Não afeta os navios
+                        tabuleiro[linha][coluna] = 2;  // Marca a célula como afetada pela cruz
+                    }
+                }
+            }
+        }
+    }
+
+    // Aplica a habilidade Octaedro
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (matrizOctaedro[i][j] == 1) {
+                int linha = linhaOctaedro + i - 2;  // Ajusta o deslocamento
+                int coluna = colunaOctaedro + j - 2;  // Ajusta o deslocamento
+
+                // Verifica se a célula está dentro dos limites do tabuleiro
+                if (linha >= 0 && linha < TAM_TABULEIRO && coluna >= 0 && coluna < TAM_TABULEIRO) {
+                    if (tabuleiro[linha][coluna] != 3) {  // Não afeta os navios
+                        tabuleiro[linha][coluna] = 4;  // Marca a célula como afetada pelo octaedro
+                    }
+                }
+            }
+        }
+    }
 
     // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
 
@@ -107,20 +191,18 @@ int main() {
     printf("Bem vindo ao jogo de batalha naval!\n");
     printf("Tabuleiro:\n");
     printf("\n");
-
-    // Exibe o tabuleiro
     printf("    ");
     for (int i = 0; i < TAM_TABULEIRO; i++) {
-        printf("%c ", 'A' + i); // Imprime as letras das colunas (A-J)
+        printf("%c ", 'A' + i); // Imprime as letras das colunas A-J
     }
     printf("\n");
 
     for (int i = 0; i < TAM_TABULEIRO; i++) {
-        printf("%2d  ", i + 1); // Imprime as linhas numeradas de 1 - 10
+        printf("%2d  ", i + 1); // Imprime as linhas numeradas de 1-10
         for (int j = 0; j < TAM_TABULEIRO; j++) {
-            printf("%d ", tabuleiro[i][j]);  // Imprime o valor da célula no tabuleiro
+            printf("%d ", tabuleiro[i][j]);  
         }
-        printf("\n");  // Nova linha após imprimir uma linha do tabuleiro
+        printf("\n");  // Nova linha após imprimir tabuleiro
     }
 
     // Exemplos de exibição das habilidades:
