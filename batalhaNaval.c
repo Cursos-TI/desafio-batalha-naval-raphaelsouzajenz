@@ -160,7 +160,7 @@ int main() {
                 // Verifica se a célula está dentro dos limites do tabuleiro
                 if (linha >= 0 && linha < TAM_TABULEIRO && coluna >= 0 && coluna < TAM_TABULEIRO) {
                     if (tabuleiro[linha][coluna] != 3) {  // Não afeta os navios
-                        tabuleiro[linha][coluna] = 2;  // Marca a célula como afetada pela cruz
+                        tabuleiro[linha][coluna] = 1;  // Marca a célula como afetada pela cruz
                     }
                 }
             }
@@ -177,7 +177,7 @@ int main() {
                 // Verifica se a célula está dentro dos limites do tabuleiro
                 if (linha >= 0 && linha < TAM_TABULEIRO && coluna >= 0 && coluna < TAM_TABULEIRO) {
                     if (tabuleiro[linha][coluna] != 3) {  // Não afeta os navios
-                        tabuleiro[linha][coluna] = 4;  // Marca a célula como afetada pelo octaedro
+                        tabuleiro[linha][coluna] = 1;  // Marca a célula como afetada pelo octaedro
                     }
                 }
             }
